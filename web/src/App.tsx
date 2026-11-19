@@ -275,7 +275,7 @@ function CampaignPage({ id, w, refreshAll }: { id: number; w: Wallet | null; ref
         </aside>
       </div>
 
-      {canSubmit && <form className="submit" onSubmit={e => { e.preventDefault(); act('Submitting your post', { submit: { campaign_id: c.id, post_url: url.trim() } }) }}>
+      {canSubmit && <form className="submit" onSubmit={e => { e.preventDefault(); w && run('Submitting your post', () => exec(w, { submit: { campaign_id: c.id, post_url: url.trim() } }), () => { setUrl(''); after() }) }}>
         <h3>{mine ? 'Submit a new post' : 'Posted it? Submit your link'}</h3>
         <div className="inline"><input required type="url" pattern="https://.*" placeholder="https://x.com/you/status/…" value={url} onChange={e => setUrl(e.target.value)} /><button className="primary">Submit</button></div>
         <p className="fine">Your slot is reserved while the brand reviews. If they don't respond within {span(c.review_secs)}, you can claim the {fromBase(c.payout)} MEC yourself.</p>
