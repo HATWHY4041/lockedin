@@ -45,7 +45,19 @@ Every step is a transaction on ME Network, so the whole campaign — budget, sub
 | Early claim rejected by contract ("review window has not ended yet") | `A00D0D8EDF7EAF9026AAF5FBA970592BBA9BF1881C582A1620FD40A7F46EEE86` |
 | Brand silent → creator 2 claims 0.1 MEC | `8AE5C77F4BEF0B5348CBC3EBF5475F96123C871F2D4BD8A95216AD1EB5CE8A26` |
 
-See it in the app: https://lockedin-me.vercel.app/#/c/1
+Campaign #2 was run end to end through the web app itself (brand and both creators clicking the real UI):
+
+| Step | Tx hash |
+|---|---|
+| Brand creates campaign #2 in the app, locks 0.3 MEC | `4A3B5B326F076D4F43814E88A304CAE949BC78E5460C0C85FF7D32FF41E58536` |
+| Creator A submits in the app | `1BEFD5579498FBA98AB9805A1F41EE8ED397CDBE35A742F3671601831E4F2AE2` |
+| Creator B submits in the app | `A1B16F728B6D7B11237E53FB2BA173CC0591F71D9092E6785746D8A3387363D9` |
+| Brand clicks "Approve & pay" → creator A paid | `000078EC13CFF98DB54FA6F92A898372B2334A43B30219F1A448F2AF0E43C5BA` |
+| Brand silent → creator B clicks "Claim" | `B996DBC3066F5E47E6AC2C575AD2F2C7D1CF6B50A21D09645B12878590BE1AEB` |
+
+Any hash can be checked on the Hub: `https://beta-hub-1317.explorer-testnet.me/cosmos/tx/v1beta1/txs/<hash>`
+
+See them in the app: https://lockedin-me.vercel.app/#/c/1 and https://lockedin-me.vercel.app/#/c/2
 
 ## Contract interface
 

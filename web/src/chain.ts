@@ -137,13 +137,13 @@ export async function deployContract(w: Wallet, wasm: Uint8Array) {
   return { codeId: up.codeId, address: inst.contractAddress, uploadTx: up.transactionHash, instantiateTx: inst.transactionHash }
 }
 
-export const txUrl = (hash: string) => `${NET.explorer}/tx/${hash}`
+export const txUrl = (hash: string) => `${NET.rest}/cosmos/tx/v1beta1/txs/${hash}`
 export const short = (a: string) => a ? a.slice(0, 7) + '…' + a.slice(-5) : ''
 
 /** Turn chain errors into plain words. */
 export function plainError(e: unknown): string {
   const m = e instanceof Error ? e.message : String(e)
-  const contract = m.match(/execute wasm contract failed: (.*?)(?:: execute wasm contract failed|$)/)
+  const contract = m.match(/message index: [0-9]+: (.*?): execute wasm contract failed/) || m.match(/execute wasm contract failed: (.*?)(?:: execute wasm contract failed|$)/)
   if (contract) return contract[1].replace(/^Generic error: /, '')
   if (/does not exist on chain/.test(m)) return 'This wallet has no MEC yet. Get test MEC from the faucet first.'
   if (/insufficient funds/.test(m)) return 'Not enough MEC in this wallet for the budget plus fees.'

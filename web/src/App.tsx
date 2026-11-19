@@ -15,6 +15,8 @@ const go = (p: string) => { location.hash = p }
 
 // ------------------------------------------------------------------ time helpers
 const nowS = () => Math.floor(Date.now() / 1000)
+// chain block time trails the wall clock a little; wait this long before offering a claim
+const CLAIM_BUFFER = 20
 function useTick(ms = 1000) { const [, s] = useState(0); useEffect(() => { const t = setInterval(() => s(x => x + 1), ms); return () => clearInterval(t) }, [ms]) }
 function span(secs: number) {
   if (secs <= 0) return '0m'
@@ -283,7 +285,7 @@ function CampaignPage({ id, w, refreshAll }: { id: number; w: Wallet | null; ref
       <h2>Submissions <span className="muted">({c.submissions.length})</span></h2>
       {c.submissions.length === 0 ? <div className="empty">No submissions yet.</div> :
         <div className="subs">{[...c.submissions].reverse().map(s => {
-          const due = s.submitted_at + c.review_secs
+          const due = s.submitted_at + c.review_secs + CLAIM_BUFFER
           const overdue = t >= due
           return (
             <div key={s.id} className={'sub ' + s.status}>
